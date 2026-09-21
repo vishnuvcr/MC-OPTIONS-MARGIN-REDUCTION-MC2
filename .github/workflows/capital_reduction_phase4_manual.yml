@@ -1,0 +1,17 @@
+name: Capital Reduction Phase 4 Manual
+
+on:
+  workflow_dispatch:
+
+jobs:
+  phase4:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate Phase 4
+        run: |
+          test -f research/capital_reduction/phase4_walk_forward_capital_proxy.md
+          test -f data/derived/capital_reduction_phase4_results.csv
+          test -f phase/capital_reduction/phase4/README.md
+      - name: Report
+        run: cat phase/capital_reduction/phase4/README.md
