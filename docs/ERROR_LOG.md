@@ -13,3 +13,7 @@
 | ERR-009 | 2026-09-22 | Phase 5 | Adding SENSEX_index.parquet exposed a parser bug that attempted to treat index parquet filenames as option expiry dates. | Changed the shared baseline loop to skip all *_index.parquet files; affected phase branches were patched. |
 
 | ERR-010 | 2026-09-22 | Research direction | Prior response framed the next question around recovery of the Monte Carlo implementation rather than the user's primary objective of reducing total trading capital/margin by adjusting BATMAN parameters. | Corrected the research framing: parameter-driven actual capital/margin minimization is the primary objective; MC recovery remains a prerequisite for an authoritative rerun. |
+
+| ERR-010 | 2026-09-22 | Capital-reduction track | Exact historical SPAN / broker margin could not be reconstructed for the full sample from the available cache/connector access. | Keep the metric hierarchy frozen; use the 9.3% stress-loss proxy only as exploratory evidence and do not call it actual margin. |
+| ERR-011 | 2026-09-22 | Capital-reduction Phase 3 | Existing complete candidate outputs do not contain the leg-level entry prices needed to rerun all planned leg-ratio variants. | Preserve the registered leg-ratio/gate families as pending validation and do not fabricate results. |
+| ERR-012 | 2026-09-22 | Capital-reduction Phase 4 | Only 16 common-gated 2026 observations are available for the selected candidate. | Use paired bootstrap and sign-flip inference and report the small sample explicitly. |
