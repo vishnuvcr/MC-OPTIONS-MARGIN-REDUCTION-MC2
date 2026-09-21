@@ -123,6 +123,16 @@ Every phase branch must contain:
 
 The research plan itself changes only when a research-plan decision changes. Routine status changes belong in STATUS_LOG.md, not by rewriting the plan.
 
+## Cost and retention interpretation
+
+The locked 2-option-point slippage is applied directly to the entry cash flow of every leg, not only to transaction-tax calculations. For long legs the adverse execution price is entry plus two points; for short legs it is entry minus two points, floored at zero. The same convention must be used in simulated and realised P&L.
+
+"Retain profit" is evaluated on both:
+1. net P&L per gated trade, because the rule only enters when gross MC-EV is positive; and
+2. net P&L per eligible D3 expiry, because the gate frequency is part of economic performance.
+
+A candidate must therefore satisfy the pre-registered EV tolerance on both measures before being considered feasible.
+
 ## Regime and market-context controls
 
 Because the objective is to test capital efficiency rather than fit a single market regime, the final analysis will stratify results by:
