@@ -37,6 +37,17 @@ Because the user has not specified numeric tolerances for retain, the output rep
 
 For each cell, the candidate with the lowest ES99 proxy is identified. This is a shortlist, not a final strategy verdict.
 
+## Sensex cross-market layer
+
+Every candidate row carries D3 Sensex features:
+- 09:30 Sensex level;
+- previous Sensex close;
+- Sensex D3 opening gap;
+- prior-20-session Sensex log return;
+- prior-20-session NIFTY minus Sensex relative return.
+
+These fields are diagnostics and are not used to choose the candidate in Phase 3. Formal walk-forward regime selection is deferred to Phase 4.
+
 ## Statistical controls
 
 All candidates use:
