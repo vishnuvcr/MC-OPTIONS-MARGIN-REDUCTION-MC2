@@ -104,6 +104,39 @@ def daily_closes(index_df: pd.DataFrame) -> pd.Series:
     return x
 
 
+def regime_features(
+    nifty_index: pd.DataFrame,
+    sensex_index: pd.DataFrame,
+    d3: pd.Timestamp,
+) -> dict[str, float]:
+    nifty_daily = daily_closes(nifty_index)
+    sensex_daily = daily_closes(sensex_index)
+    sensex_d3 = sensex_index[
+        sensex_index["trade_date"].eq(d3)
+        & (sensex_index["timestamp"].dt.time > pd.Timestamp("09:30").time())
+    ]
+    if sensex_d3.empty:
+        raise ValueError(f"No Sensex post-09:30 observation on {d3.date()}")
+    sensex_0930 = float(sensex_d3.iloc[0]["open"])
+    prior_sensex = sensex_daily.loc[sensex_daily.index < d3].tail(20)
+    prior_nifty = nifty_daily.loc[nifty_daily.index < d3].tail(20)
+    sensex_prev_close = float(sensex_daily.loc[sensex_daily.index < d3].iloc[-1])
+    nifty_prev_close = float(nifty_daily.loc[nifty_daily.index < d3].iloc[-1])
+    sensex_20d = float(np.log(prior_sensex.iloc[-1] / prior_sensex.iloc[0])) if len(prior_sensex) >= 2 else np.nan
+    nifty_20d = float(np.log(prior_nifty.iloc[-1] / prior_nifty.iloc[0])) if len(prior_nifty) >= 2 else np.nan
+    return {
+        "sensex_0930": sensex_0930,
+        "sensex_prev_close": sensex_prev_close,
+        "nifty_prev_close": nifty_prev_close,
+        "sensex_d3_gap_pct": sensex_0930 / sensex_prev_close - 1.0,
+        "nifty_d3_gap_pct": float(first_index_price(d3, nifty_index)) / nifty_prev_close - 1.0,
+        "sensex_prior20d_log_return": sensex_20d,
+        "nifty_prior20d_log_return": nifty_20d,
+        "nifty_minus_sensex_prior20d_log_return": nifty_20d - sensex_20d
+        if np.isfinite(nifty_20d) and np.isfinite(sensex_20d) else np.nan,
+    }
+
+
 def parse_expiry(path: Path) -> pd.Timestamp:
     return pd.Timestamp(path.stem)
 
