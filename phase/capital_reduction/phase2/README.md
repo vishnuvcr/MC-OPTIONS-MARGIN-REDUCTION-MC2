@@ -1,7 +1,7 @@
 # Capital-Reduction Track — Phase 2
 
 Branch: capital-reduction-phase-2
-Status: IN PROGRESS — BASELINE CAPITAL RECONSTRUCTION
+Status: DONE PROVISIONALLY — BASELINE CAPITAL RECONSTRUCTION DATA-CONSTRAINED
 
 ## Objective
 Measure the locked BATMAN baseline's actual exchange-style margin and total entry-capital requirement on each eligible expiry, using date-specific SPAN risk-parameter inputs where available.
@@ -36,3 +36,6 @@ The baseline strikes are read from the prior trade ledger. The four-leg basket i
 
 ## Next branch
 capital-reduction-phase-3
+
+## Phase 2 outcome
+Exact historical NSE SPAN / Paytm Money margin could not be reconstructed for the full baseline because the working cache did not contain the required historical SPAN files and the available connector path did not expose a complete historical archive. The baseline capital model, cache manifest, and local SPAN-engine interface are nevertheless frozen for a future exact-margin rerun. Phase 3 therefore used a clearly-labelled 9.3% stress-loss capital-at-risk proxy rather than claiming actual margin.
