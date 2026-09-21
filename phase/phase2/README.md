@@ -12,11 +12,12 @@ Reconstruct the locked NIFTY BATMAN control strategy before testing any strike a
 
 1. NIFTY 1-minute option OHLCV/OI history covering the eligible D3 sessions.
 2. NIFTY spot/index history sufficient to build the 756-session bootstrap distribution.
+3. BSE SENSEX 1-minute spot history for cross-market regime alignment.
 3. Contract expiry and strike metadata.
-4. Historical NIFTY lot-size schedule.
-5. Historical transaction-tax schedule.
-6. Historical brokerage scenario.
-7. NSE SPAN risk-parameter files where exact exchange-margin reconstruction is attempted.
+5. Historical NIFTY lot-size schedule.
+6. Historical transaction-tax schedule.
+7. Historical brokerage scenario.
+8. NSE SPAN risk-parameter files where exact exchange-margin reconstruction is attempted.
 
 ## Preferred intraday source
 
@@ -51,6 +52,7 @@ For every eligible expiry:
 11. Hold to expiry settlement.
 12. Apply historical lot size, brokerage and STT.
 13. Record gross P&L, net P&L, win/loss, ES95, ES99, max loss, capital proxy and data-quality flags.
+14. Store non-look-ahead Sensex fields: D3 09:30 level, previous close, D3 gap, prior-20-session return and NIFTY-minus-Sensex relative return.
 
 ## Non-negotiable validation
 
@@ -86,6 +88,10 @@ Phase 2 is complete only when the baseline has:
 - win rate,
 - ES95/ES99,
 - and a clearly labelled margin measure or proxy.
+
+## Sensex integration
+
+Sensex is part of the Phase 2 data contract. It is recorded for every valid D3 but does not affect the BATMAN gate, strikes, leg ratios, execution or exit. Only information observable by 09:30 IST on D3 is permitted.
 
 ## Regime labels collected for later robustness
 
