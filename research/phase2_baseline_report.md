@@ -6,6 +6,14 @@ The locked BATMAN control has now been reconstructed end-to-end using the 1-minu
 
 **This is a provisional empirical baseline, not the canonical final baseline**, because the original mathematical transformation used by the strategy's 756-session Monte Carlo has not yet been recovered.
 
+## Corrected cost convention
+
+The locked 2-point slippage is applied directly to every entry cash flow:
+- long legs execute at entry + 2 points;
+- short legs execute at entry - 2 points, floored at zero.
+
+This correction was necessary because the first implementation used slippage for the simulated path P&L but omitted its direct realized-entry impact. The first 81.13% win-rate result is therefore superseded.
+
 ## Sample and execution
 
 - Source option files discovered: 106
@@ -13,14 +21,11 @@ The locked BATMAN control has now been reconstructed end-to-end using the 1-minu
 - Valid rows: 98
 - Invalid row: 1, skipped because no post-09:30 executable option observation existed
 - Gated trades: 53
-- Gate rate among all expiry rows: 53.54%
 - Gate rate among valid rows: 54.08%
-- Realized wins: 43 / 53
-- Realized win rate: **81.13%**
-- Mean realized net P&L: **₹2,442.22 per gated trade**
-- Median realized net P&L: **₹3,244.48**
-- Minimum realized net P&L: **−₹39,705.60**
-- Maximum realized net P&L: **₹25,616.21**
+- Realized wins: 41 / 53
+- Realized conditional win rate: **77.36%**
+- Mean realized net P&L: **₹1,702.98 per gated trade**
+- Median realized net P&L: **₹2,369.68**
 - Mean ES95 proxy: **₹12,209.67**
 - Mean ES99 proxy: **₹12,688.27**
 
@@ -35,31 +40,24 @@ The source manifest contains 106 NIFTY expiry files. The downloaded NIFTY index 
 
 ## Interpretation
 
-The 81.13% win rate is conditional on the gross-MC-EV gate. It is therefore not an unconditional BATMAN win rate.
+The win rate is conditional on the gross-MC-EV gate. It should not be interpreted as an unconditional BATMAN win rate.
 
-The mean and median net P&L already include the locked 2-point-per-leg slippage convention, the historical lot-size mapping used by the engine, brokerage scenario and date-specific STT handling.
+Mean and median net P&L include the locked 2-point-per-leg slippage convention, historical lot size, the ₹20/order brokerage scenario and date-specific STT handling.
 
 ## Model limitation
 
 The project rule states "756-session bootstrap MC, 5,000 paths" but does not specify the mathematical path transformation. The current provisional engine uses:
+1. 756 preceding NIFTY session closes;
+2. daily log returns;
+3. with-replacement sampling;
+4. one draw per trading-session transition from D3 to expiry;
+5. first post-09:30 NIFTY spot as the initial level;
+6. 5,000 paths;
+7. P20/P35/P65/P80 terminal-price quantiles;
+8. ordered nearest-unique mapping to listed strikes.
 
-1. 756 preceding NIFTY session closes.
-2. Daily log returns from that history.
-3. With-replacement bootstrap.
-4. Number of draws equal to trading-session transitions from D3 to expiry.
-5. Initial level equal to the first post-09:30 NIFTY spot observation.
-6. 5,000 paths.
-7. P20/P35/P65/P80 terminal-price quantiles.
-8. Ordered assignment to distinct listed strikes.
-
-This implementation is versioned as provisional and will be replaced if the original MC definition is recovered.
+This remains versioned as provisional.
 
 ## Phase 3 gate
 
-The baseline is sufficiently reproducible to begin a controlled strike search, but any candidate improvement is provisional until it is tested with:
-- the same MC implementation;
-- paired candidate-vs-baseline comparisons;
-- ES95/ES99;
-- multiple-testing-aware inference;
-- walk-forward validation;
-- historical SPAN/broker-margin comparison where possible.
+The corrected baseline is suitable for controlled strike comparison. Any candidate improvement still requires Phase 4 walk-forward validation, multiple-testing-aware inference, ES95/ES99 comparison and historical SPAN/broker-margin comparison where possible.
