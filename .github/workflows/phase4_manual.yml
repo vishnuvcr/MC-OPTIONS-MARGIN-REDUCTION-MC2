@@ -33,6 +33,9 @@ jobs:
       - name: Run walk-forward
         run: python src/phase4_walk_forward.py
 
+      - name: Run cost stress
+        run: python src/phase4_cost_stress.py
+
       - name: Upload results
         uses: actions/upload-artifact@v4
         with:
@@ -42,6 +45,7 @@ jobs:
             data/derived/phase4_walk_forward_results.csv
             data/derived/phase4_sensex_regime_results.csv
             data/derived/phase4_run_summary.json
+            data/derived/phase4_cost_stress.csv
 
       - name: Commit results
         run: |
