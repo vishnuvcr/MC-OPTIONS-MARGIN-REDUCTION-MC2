@@ -1,6 +1,6 @@
 # MC2 — NIFTY Batman Margin-Reduction Research
 
-Status: **Phase 2 complete provisionally; Phase 3 strike search starting**
+Status: **Phase 3 complete provisionally; Sensex-integrated Phase 4 robustness now starting**
 
 This repository studies whether NIFTY BATMAN option strike placement can be altered to reduce margin/risk capital while retaining profit expectancy and win rate.
 
@@ -19,13 +19,19 @@ This repository studies whether NIFTY BATMAN option strike placement can be alte
 > - Costs: brokerage + STT + historical lot size
 > - Sizing: ES95/ES99 risk proxy, not maximum-profit sizing
 
+## Sensex integration
+
+BSE SENSEX is now a required cross-market series in Phases 1–5. The TradeMarkk source provides `index/SENSEX.parquet` with 1-minute OHLCV and IST timestamps. Official BSE market-data/index-archive sources remain the verification hierarchy. urlBSE market-data servicehttps://marketdata.bseindia.com/ urlBSE Sensex pagehttps://www.bseindia.com/sensex/code/45
+
+Sensex is recorded as a **non-look-ahead diagnostic/regime variable**. It does not alter the locked NIFTY signal, gate, strike mapping or leg ratio.
+
 ## Research status
 
 - Phase 0 — **DONE**: repository foundation and research protocol.
-- Phase 1 — **DONE**: literature, data-source, contract/cost and methodological audit.
-- Phase 2 — **DONE PROVISIONALLY**: 99 expiry rows evaluated, 98 valid, 53 gross-MC-EV-gated trades, 81.13% conditional realized win rate, ₹2,442 mean realized net P&L per gated trade under the provisional MC implementation.
-- Phase 3 — **IN PROGRESS**: controlled strike/spot alteration search using the same engine.
-- Phase 4 — **PLANNED**: walk-forward and robustness validation.
+- Phase 1 — **DONE**: literature, data-source, contract/cost and methodological audit; Sensex source lineage added.
+- Phase 2 — **DONE PROVISIONALLY**: corrected 53 gated trades, 77.36% conditional win rate, ₹1,702.98 mean net P&L per gated trade; Sensex D3/rolling-regime fields added to the baseline ledger.
+- Phase 3 — **DONE PROVISIONALLY**: 53 finite strike configurations tested under identical assumptions; Sensex fields carried into every candidate-expiry row.
+- Phase 4 — **IN PROGRESS**: walk-forward, multiple-testing-aware, Sensex-stratified robustness and stress validation.
 - Phase 5 — **PLANNED**: final manuscript and reproducibility package.
 
 ## Phase 2 outputs
@@ -36,31 +42,27 @@ This repository studies whether NIFTY BATMAN option strike placement can be alte
 - [Phase 2 protocol](phase/phase2/README.md)
 - [Phase 2 error log](phase/phase2/ERROR_LOG.md)
 
-## Core methodological constraint
+## Phase 3 outputs
 
-The research must separate:
-1. economic profitability,
-2. exchange/broker margin requirement,
-3. a transparent risk-capital proxy when exact historical broker margin is unavailable.
-
-The baseline rule is not to be silently changed. Any proposed alteration must be evaluated against the locked baseline under identical data, execution, cost and sizing assumptions.
+- [Phase 3 protocol](research/phase3_candidate_protocol.md)
+- [Phase 3 candidate summary](data/derived/phase3_candidate_summary.csv)
+- [Phase 3 retention frontier](data/derived/phase3_retention_frontier.csv)
+- [Phase 3 candidate ledger](data/derived/phase3_candidate_trade_ledger.csv)
+- [Phase 3 protocol/README](phase/phase3/README.md)
 
 ## Provisional-baseline warning
 
-The original mathematical transformation behind the phrase "756-session bootstrap MC" is not yet recovered. The current numerical baseline uses a documented bootstrap of daily log returns from the preceding 756 sessions to create terminal paths. All Phase 2/3 results are therefore labelled **provisional** until the original MC definition is recovered or otherwise established.
+The original mathematical transformation behind the phrase "756-session bootstrap MC" is not yet recovered. The current numerical baseline uses a documented bootstrap of daily log returns from the preceding 756 sessions to create terminal paths. All Phase 2–4 results remain provisional until the original MC definition is recovered or otherwise established.
 
-## Phase 3 optimisation target
+## Core methodological constraint
 
-Phase 3 will search a pre-registered finite family of strike perturbations. Primary outputs are:
-- gross MC-EV;
-- realized net EV and win rate;
-- ES95/ES99;
-- worst simulated loss;
-- capital/risk proxy;
-- relative capital reduction versus baseline.
+The research separates:
+1. economic profitability,
+2. exchange/broker margin requirement,
+3. a transparent risk-capital proxy when exact historical margin is unavailable.
 
-Exact historical SPAN/broker margin, where reproducibly available, remains separate from ES proxies.
+The baseline rule is not silently changed. Candidate alterations are evaluated against the locked baseline under identical data, execution, cost and sizing assumptions.
 
 ## Data policy
 
-Official NSE/NSE Clearing sources are preferred for settlement, contract metadata, historical risk parameters, participant statistics and FII/DII activity. The validated 1-minute option source is used for the 09:30 execution reconstruction, with cross-checking and explicit coverage flags. Large or restricted raw datasets are not committed wholesale.
+Official NSE/NSE Clearing and BSE sources are preferred for settlement, index history, contract metadata, historical risk parameters and participant statistics. The validated TradeMarkk 1-minute source is used for reproducible intraday execution alignment and is cross-checked against official sources where possible.
