@@ -1,0 +1,26 @@
+name: Capital Reduction Phase 2 Manual
+
+on:
+  workflow_dispatch:
+
+jobs:
+  phase2:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate cache manifest
+        run: |
+          test -f data/derived/prior_track_phase2_baseline_trade_ledger.csv
+          test -f research/capital_reduction/phase2_margin_manifest_spec.md
+          test -f research/capital_reduction/phase2_margin_method.md
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-capital-reduction.txt
+      - name: Run baseline capital calculation
+        run: python src/capital_reduction_phase2_margin.py
+      - name: Upload capital ledger
+        uses: actions/upload-artifact@v4
+        with:
+          name: capital-reduction-phase2-ledger
+          path: data/derived/capital_reduction_phase2/
