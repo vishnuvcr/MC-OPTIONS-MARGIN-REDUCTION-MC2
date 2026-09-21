@@ -29,6 +29,7 @@ NIFTY BATMAN as stated in the root README is the control arm. It must be evaluat
 
 ### Phase 2 — Baseline reconstruction
 - Reconstruct D3-to-expiry observations.
+- Add BSE SENSEX 1-minute spot alignment and non-look-ahead D3/rolling cross-market regime fields for every eligible expiry. Sensex fields are diagnostics only and do not alter the locked BATMAN signal.
 - For each eligible session, map the 756-session empirical terminal sample used by the bootstrap model, generate 5,000 paths, estimate MC-EV and gate status, select P20/P35/P65/P80 and nearest unique tradable strikes.
 - Apply the exact leg structure, first executable observation after 09:30, 2-point per-leg slippage, historical lot size, brokerage/STT and expiry settlement.
 - Compare model decisions with realised outcomes.
@@ -37,6 +38,9 @@ NIFTY BATMAN as stated in the root README is the control arm. It must be evaluat
 - Status: PLANNED.
 
 ### Phase 3 — Spot/strike alteration search
+- Carry the same non-look-ahead Sensex regime fields into the candidate ledger.
+- Report candidate performance by Sensex/NIFTY divergence and cross-market stress regimes without using Sensex to alter candidate selection.
+
 Search only pre-specified families to avoid unconstrained data-mining:
 1. Quantile grid perturbations around (20,35,65,80).
 2. Symmetry-preserving and symmetry-breaking wing shifts.
@@ -59,6 +63,7 @@ Status: PLANNED.
 
 ### Phase 4 — Robustness / out-of-sample validation
 - Use walk-forward splits.
+- Stratify every primary robustness result by pre-entry Sensex regime and NIFTY-versus-Sensex relative-return regime.
 - Freeze candidate parameters using only training data.
 - Test on later unseen expiries.
 - Bootstrap confidence intervals and paired tests versus baseline.
@@ -68,6 +73,7 @@ Status: PLANNED.
 - Status: PLANNED.
 
 ### Phase 5 — Manuscript and reproducibility
+- Include Sensex data lineage, cross-market regime definitions, NIFTY/Sensex divergence plots, regime-stratified results and limitations.
 - Produce complete manuscript with abstract, methods, results, inference, discussion, limitations, conclusion, future work, figures, tables, appendices and supplemental data dictionary.
 - Publish cached/canonical derived datasets that are legally redistributable; keep restricted-source raw data as manifests/checksums/loader instructions when redistribution is not permitted.
 - Status: PLANNED.
@@ -132,6 +138,12 @@ The locked 2-option-point slippage is applied directly to the entry cash flow of
 2. net P&L per eligible D3 expiry, because the gate frequency is part of economic performance.
 
 A candidate must therefore satisfy the pre-registered EV tolerance on both measures before being considered feasible.
+
+## Sensex integration
+
+The BSE SENSEX is a required cross-market series in Phases 1–5. Phase 2 stores non-look-ahead Sensex features; Phase 3 carries them into the candidate ledger and regime tables; Phase 4 uses them for walk-forward stratification; Phase 5 reports the resulting cross-market analysis. Sensex observations never alter the locked NIFTY signal unless a separately registered cross-index ablation is explicitly opened.
+
+Official BSE data are the preferred verification source. BSE's market-data service exposes indices OHLC data, including Sensex, and the BSE Sensex page exposes historical values. The TradeMarkk dataset provides a reproducible intraday `index/SENSEX.parquet` series with IST timestamps for the same execution-date alignment.
 
 ## Regime and market-context controls
 
