@@ -1,0 +1,19 @@
+name: Capital Reduction Phase 5 Manual
+
+on:
+  workflow_dispatch:
+
+jobs:
+  phase5:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate combined manuscript
+        run: |
+          test -f manuscript/combined_manuscript.md
+          test -f manuscript/combined_supplementary_tables.md
+          test -f manuscript/combined_data_dictionary.md
+          test -f phase/capital_reduction/phase5/README.md
+      - name: Report
+        run: |
+          echo 'Combined capital-reduction manuscript package is present.'
