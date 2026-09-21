@@ -1,0 +1,23 @@
+name: Capital Reduction Phase 1 Manual
+
+on:
+  workflow_dispatch:
+
+jobs:
+  phase1:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate phase specification
+        run: |
+          test -f research/capital_reduction/RESEARCH_PLAN.md
+          test -f research/capital_reduction/PHASE_MAP.md
+          test -f research/capital_reduction/phase1_literature_matrix.md
+          test -f research/capital_reduction/phase1_margin_data_protocol.md
+          test -f research/capital_reduction/phase1_parameter_registry.md
+          test -f phase/capital_reduction/phase1/README.md
+          test -f phase/capital_reduction/phase1/ERROR_LOG.md
+          test -f research/capital_reduction/COMBINED_MANUSCRIPT_PLAN.md
+      - name: Print research status
+        run: |
+          echo 'Capital-reduction Phase 1 specification is present and validated.'
