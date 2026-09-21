@@ -89,3 +89,28 @@ NSE states that SPAN is portfolio-based and gives offsetting treatment to option
 4. Extend official NSE/BSE cross-market history and global stress variables.
 5. Test leg-ratio changes only after strike geometry is validated.
 6. Conduct prospective paper trading before any live deployment.
+
+## Capital-reduction research track — final provisional status
+
+A second, separate Phase 1–5 research track was started in the same repository without altering the original Sensex-integrated MC2 research.
+
+**Primary objective:** reduce actual total trading capital / blocked margin by changing BATMAN parameters while keeping one-lot position size fixed.
+
+Status:
+- Phase 1: **DONE PROVISIONALLY** — literature, margin methodology, data-source audit and parameter registry.
+- Phase 2: **DONE PROVISIONALLY / DATA-CONSTRAINED** — actual historical SPAN margin cache unavailable for the full sample; local SPAN-engine interface and manifest frozen.
+- Phase 3: **DONE PROVISIONALLY** — P19/P35/P65/P80 selected by training using a clearly labelled 9.3% capital-at-risk proxy.
+- Phase 4: **DONE PROVISIONALLY** — 2026 test proxy reduction 1.04%, sign-flip p=0.1214; no statistically established actual-margin improvement.
+- Phase 5: **DONE PROVISIONALLY** — combined manuscript and supplementary package assembled.
+
+Key result: P19/P35/P65/P80 reduced the 2026 gated 9.3% stress-loss capital proxy by **₹1,195.59 (1.04%)** versus baseline. This is **not actual NSE/Paytm Money margin** and is therefore not a production-margin conclusion.
+
+- [Capital-reduction research plan](research/capital_reduction/RESEARCH_PLAN.md)
+- [Capital-reduction final provisional conclusion](https://github.com/vishnuvcr/MC-OPTIONS-MARGIN-REDUCTION-MC2/blob/capital-reduction-phase-5/research/capital_reduction/final_provisional_conclusion.md)
+- [Combined manuscript](https://github.com/vishnuvcr/MC-OPTIONS-MARGIN-REDUCTION-MC2/blob/capital-reduction-phase-5/manuscript/combined_manuscript.md)
+- [Combined supplementary tables](https://github.com/vishnuvcr/MC-OPTIONS-MARGIN-REDUCTION-MC2/blob/capital-reduction-phase-5/manuscript/combined_supplementary_tables.md)
+- [Capital-reduction Phase 1](https://github.com/vishnuvcr/MC-OPTIONS-MARGIN-REDUCTION-MC2/tree/capital-reduction-phase-1)
+- [Capital-reduction Phase 2](https://github.com/vishnuvcr/MC-OPTIONS-MARGIN-REDUCTION-MC2/tree/capital-reduction-phase-2)
+- [Capital-reduction Phase 3](https://github.com/vishnuvcr/MC-OPTIONS-MARGIN-REDUCTION-MC2/tree/capital-reduction-phase-3)
+- [Capital-reduction Phase 4](https://github.com/vishnuvcr/MC-OPTIONS-MARGIN-REDUCTION-MC2/tree/capital-reduction-phase-4)
+- [Capital-reduction Phase 5](https://github.com/vishnuvcr/MC-OPTIONS-MARGIN-REDUCTION-MC2/tree/capital-reduction-phase-5)
