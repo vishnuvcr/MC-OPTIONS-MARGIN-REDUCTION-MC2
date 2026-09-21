@@ -104,6 +104,50 @@ def daily_closes(index_df: pd.DataFrame) -> pd.Series:
     return x
 
 
+def regime_features(
+    nifty_index: pd.DataFrame,
+    sensex_index: pd.DataFrame,
+    d3: pd.Timestamp,
+) -> dict[str, float]:
+    nifty_daily = daily_closes(nifty_index)
+    sensex_daily = daily_closes(sensex_index)
+
+    sensex_d3 = sensex_index[
+        sensex_index["trade_date"].eq(d3)
+        & (sensex_index["timestamp"].dt.time > pd.Timestamp("09:30").time())
+    ]
+    if sensex_d3.empty:
+        raise ValueError(f"No Sensex post-09:30 observation on {d3.date()}")
+
+    sensex_0930 = float(sensex_d3.iloc[0]["open"])
+    prior_sensex_days = sensex_daily.loc[sensex_daily.index < d3].tail(20)
+    prior_nifty_days = nifty_daily.loc[nifty_daily.index < d3].tail(20)
+
+    sensex_prev_close = float(sensex_daily.loc[sensex_daily.index < d3].iloc[-1])
+    nifty_prev_close = float(nifty_daily.loc[nifty_daily.index < d3].iloc[-1])
+
+    sensex_20d = (
+        float(np.log(prior_sensex_days.iloc[-1] / prior_sensex_days.iloc[0]))
+        if len(prior_sensex_days) >= 2 else np.nan
+    )
+    nifty_20d = (
+        float(np.log(prior_nifty_days.iloc[-1] / prior_nifty_days.iloc[0]))
+        if len(prior_nifty_days) >= 2 else np.nan
+    )
+
+    return {
+        "sensex_0930": sensex_0930,
+        "sensex_prev_close": sensex_prev_close,
+        "nifty_prev_close": nifty_prev_close,
+        "sensex_d3_gap_pct": sensex_0930 / sensex_prev_close - 1.0,
+        "nifty_d3_gap_pct": float(first_index_price(d3, nifty_index)) / nifty_prev_close - 1.0,
+        "sensex_prior20d_log_return": sensex_20d,
+        "nifty_prior20d_log_return": nifty_20d,
+        "nifty_minus_sensex_prior20d_log_return": nifty_20d - sensex_20d
+        if np.isfinite(nifty_20d) and np.isfinite(sensex_20d) else np.nan,
+    }
+
+
 def parse_expiry(path: Path) -> pd.Timestamp:
     return pd.Timestamp(path.stem)
 
@@ -222,6 +266,7 @@ def expected_shortfall(losses: np.ndarray, alpha: float) -> float:
 def main() -> None:
     raw = Path("data/raw")
     index = load_index(raw / "NIFTY_index.parquet")
+    sensex = load_index(raw / "SENSEX_index.parquet")
     closes = daily_closes(index)
     trading_days = list(closes.index)
 
@@ -240,6 +285,7 @@ def main() -> None:
         d3 = trading_days[ex_pos - 3]
         try:
             spot = first_index_price(d3, index)
+            regime = regime_features(index, sensex, d3)
             prior = closes.loc[:d3].iloc[:-1]
             terminal = bootstrap_terminal(
                 spot, prior, closes.index, d3, expiry, paths,
@@ -302,6 +348,13 @@ def main() -> None:
                     "expiry": str(expiry.date()),
                     "d3": str(d3.date()),
                     "spot_0930": spot,
+                    "sensex_0930": regime["sensex_0930"],
+                    "sensex_prev_close": regime["sensex_prev_close"],
+                    "sensex_d3_gap_pct": regime["sensex_d3_gap_pct"],
+                    "nifty_d3_gap_pct": regime["nifty_d3_gap_pct"],
+                    "sensex_prior20d_log_return": regime["sensex_prior20d_log_return"],
+                    "nifty_prior20d_log_return": regime["nifty_prior20d_log_return"],
+                    "nifty_minus_sensex_prior20d_log_return": regime["nifty_minus_sensex_prior20d_log_return"],
                     "gate": gate,
                     "P20": mapping["P20"],
                     "P35": mapping["P35"],
