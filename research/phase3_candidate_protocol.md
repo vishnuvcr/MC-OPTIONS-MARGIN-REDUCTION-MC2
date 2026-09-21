@@ -48,3 +48,8 @@ Primary comparison is candidate versus baseline on common dates where both satis
 Secondary comparison uses the candidate's own gated-trade statistics.
 
 Capital objective is minimum ES99 subject to the retention frontier.
+
+
+## Sensex diagnostics
+
+Every candidate-expiry observation includes non-look-ahead Sensex context. Phase 3 does not use Sensex to alter candidate quantiles or rank candidates. The fields are retained for Phase 4 stratified inference and for checking whether apparent capital-efficiency changes are concentrated in particular cross-market states.
