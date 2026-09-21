@@ -7,3 +7,14 @@ The combined manuscript integrates the original Sensex-aware MC2 research and th
 
 ## Final conclusion
 No production change is justified yet. Exact SPAN reconstruction and the pending leg-ratio/gate parameter families remain the required next validation.
+
+## Package contents
+- manuscript/combined_manuscript.md
+- manuscript/combined_supplementary_tables.md
+- manuscript/combined_data_dictionary.md
+- manuscript/figures/capital_proxy.svg
+- manuscript/figures/capital_slippage.svg
+- manuscript/combined_figures/phase3_es99_frontier.svg
+- manuscript/combined_figures/walk_forward_pnl.svg
+- manuscript/combined_figures/sensex_regime_delta.svg
+- research/capital_reduction/final_provisional_conclusion.md
