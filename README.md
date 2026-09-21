@@ -108,6 +108,7 @@ Key result: P19/P35/P65/P80 reduced the 2026 gated 9.3% stress-loss capital prox
 - [Capital-reduction research plan](research/capital_reduction/RESEARCH_PLAN.md)
 - [Capital-reduction final provisional conclusion](https://github.com/vishnuvcr/MC-OPTIONS-MARGIN-REDUCTION-MC2/blob/capital-reduction-phase-5/research/capital_reduction/final_provisional_conclusion.md)
 - [Combined manuscript](https://github.com/vishnuvcr/MC-OPTIONS-MARGIN-REDUCTION-MC2/blob/capital-reduction-phase-5/manuscript/combined_manuscript.md)
+- [Combined final conclusion](research/combined_final_conclusion.md)
 - [Combined supplementary tables](https://github.com/vishnuvcr/MC-OPTIONS-MARGIN-REDUCTION-MC2/blob/capital-reduction-phase-5/manuscript/combined_supplementary_tables.md)
 - [Capital-reduction Phase 1](https://github.com/vishnuvcr/MC-OPTIONS-MARGIN-REDUCTION-MC2/tree/capital-reduction-phase-1)
 - [Capital-reduction Phase 2](https://github.com/vishnuvcr/MC-OPTIONS-MARGIN-REDUCTION-MC2/tree/capital-reduction-phase-2)
