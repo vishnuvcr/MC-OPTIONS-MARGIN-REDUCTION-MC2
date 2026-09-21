@@ -26,3 +26,8 @@
 | CR-1.0 | Capital-reduction research | STARTED | New independent Phase 1–5 research track added in the same repository; prior Sensex-integrated Phases 0–5 retained. Primary target is parameter-driven actual capital/margin reduction. |
 | CR-1.1 | Capital-reduction Phase 1 | DONE PROVISIONALLY | Literature, margin methodology, data-source matrix, parameter registry, and combined manuscript plan completed. |
 | CR-2.1 | Capital-reduction Phase 2 | IN PROGRESS | Baseline capital reconstruction branch created; prior trade ledger carried forward; SPAN cache/manifest and margin calculation engine specification committed. |
+
+| CR-2.2 | Capital-reduction Phase 2 | DONE PROVISIONALLY / DATA-CONSTRAINED | Baseline margin model and SPAN cache manifest frozen; exact historical SPAN/broker data unavailable for full-sample calculation. |
+| CR-3.1 | Capital-reduction Phase 3 | DONE PROVISIONALLY | P19/P35/P65/P80 selected on 2024-2025 training using 9.3% stress-loss capital proxy; 0.73% training proxy reduction. |
+| CR-4.1 | Capital-reduction Phase 4 | DONE PROVISIONALLY | 2026 common-gated test proxy reduction 1.04%; paired sign-flip p=0.1214; P&L delta -₹22.60 with CI crossing zero. |
+| CR-5.1 | Capital-reduction Phase 5 | DONE PROVISIONALLY | Combined manuscript, supplementary tables, data dictionary, figures and final provisional conclusion assembled. |
