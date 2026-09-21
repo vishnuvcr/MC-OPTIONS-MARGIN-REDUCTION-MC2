@@ -2,7 +2,17 @@
 
 ## Research question
 
-Can the four BATMAN strike locations and/or the 1:-2:-2:1 leg geometry be altered so that required capital/margin is reduced while preserving the baseline strategy's economically relevant profit expectancy and win rate, after realistic execution slippage, brokerage, STT, historical lot sizes, and risk-based sizing?
+Can BATMAN parameters be adjusted so that the **actual total capital/trading margin required to enter and maintain one strategy position is materially reduced**, while preserving the baseline strategy's economically relevant net expectancy, win rate and acceptable risk? The primary optimization is therefore **capital/margin minimization by parameter adjustment**. ES95/ES99 is a secondary risk diagnostic, not the primary optimization target.
+
+The parameter search may include, subject to the pre-registered search space:
+- strike quantiles / strike distances;
+- inner-leg and outer-leg spacing;
+- leg ratios around the locked 1:-2:-2:1 structure;
+- entry/gating thresholds that change which setups are traded;
+- strike-rounding / nearest-unique mapping rules;
+- other BATMAN parameters that directly change position construction or required capital.
+
+The research must distinguish three separate quantities: (1) exchange/broker margin blocked, (2) cash/premium required for long-option legs, and (3) total deployable capital required for the complete four-leg position under the Paytm Money/NSE cost and margin convention.
 
 ### Primary null and alternative
 
@@ -55,9 +65,12 @@ For every candidate:
 - reject candidates that fail the gross MC-EV gate unless the study protocol explicitly creates a separate ablation arm.
 
 Primary optimisation target:
-- minimise required capital/margin;
-- subject to pre-registered tolerances on net expectancy and win rate;
-- with robustness penalties for parameter sensitivity and data-quality dependence.
+- minimise **actual required total capital / blocked margin per complete BATMAN position**;
+- subject to pre-registered tolerances on net expectancy, win rate and tail-loss behaviour;
+- report absolute and percentage capital reduction versus the locked baseline;
+- separately report premium cash outlay, exchange/broker margin and total deployable capital;
+- use ES95/ES99 only as secondary robustness diagnostics;
+- penalise parameter solutions that are fragile to strike availability, liquidity, transaction costs, expiry regime or small parameter perturbations.
 
 Status: PLANNED.
 
@@ -83,10 +96,11 @@ Status: PLANNED.
 A candidate may only be described as a research-supported improvement if all are true:
 1. Positive net expectancy under the locked primary cost model.
 2. Win rate deterioration is inside a pre-registered tolerance band.
-3. Capital/margin or risk-capital proxy is materially lower than baseline.
-4. Improvement survives walk-forward validation.
-5. Result remains directionally stable under stress slippage/cost scenarios.
-6. No single expiry/regime dominates the result.
+3. **Actual required total capital / blocked margin is materially lower than baseline**, with the amount and percentage reduction explicitly reported.
+4. The reduction is not created merely by reducing position size; it must arise from an allowed BATMAN parameter change or position-construction rule.
+5. The improvement survives walk-forward validation.
+6. Result remains directionally stable under stress slippage/cost scenarios.
+7. No single expiry/regime dominates the result.
 
 ## Statistical plan
 
