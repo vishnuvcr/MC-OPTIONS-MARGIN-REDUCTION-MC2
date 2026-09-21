@@ -1,0 +1,3 @@
+pandas>=2.0
+pyarrow>=14
+marginism==0.2.0
