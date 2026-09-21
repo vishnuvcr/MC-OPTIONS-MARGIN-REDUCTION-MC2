@@ -1,0 +1,11 @@
+{
+  "baseline_id": "Q20p0_35p0_65p0_80p0",
+  "split_count": 2,
+  "bootstrap_reps": 10000,
+  "permutation_reps": 10000,
+  "sensex_regimes": [
+    "sensex_d3_gap_pct",
+    "nifty_minus_sensex_prior20d_log_return"
+  ],
+  "candidate_count": 53
+}
