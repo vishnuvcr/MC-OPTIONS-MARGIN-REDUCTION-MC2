@@ -1,0 +1,18 @@
+name: Capital Reduction Phase 3 Manual
+
+on:
+  workflow_dispatch:
+
+jobs:
+  phase3:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate Phase 3
+        run: |
+          test -f research/capital_reduction/phase3_capital_proxy_protocol.md
+          test -f data/derived/capital_reduction_phase3_frontier.csv
+          test -f phase/capital_reduction/phase3/README.md
+          test -f phase/capital_reduction/phase3/ERROR_LOG.md
+      - name: Report
+        run: cat phase/capital_reduction/phase3/README.md
