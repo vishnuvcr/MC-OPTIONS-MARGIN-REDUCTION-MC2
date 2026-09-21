@@ -211,7 +211,9 @@ def expected_shortfall(losses: np.ndarray, alpha: float) -> float:
     losses = np.asarray(losses, dtype=float)
     cutoff = np.quantile(losses, 1 - alpha)
     tail = losses[losses <= cutoff]
-    return float(-tail.mean()) if len(tail) else 0.0
+    if not len(tail):
+        return 0.0
+    return float(max(0.0, -tail.mean()))
 
 
 def main() -> None:
@@ -319,11 +321,13 @@ def main() -> None:
             )
 
     out = pd.DataFrame(results)
+    if "status" not in out.columns:
+        out["status"] = np.nan
     out_dir = Path("data/derived")
     out_dir.mkdir(parents=True, exist_ok=True)
     out.to_csv(out_dir / "phase2_baseline_trade_ledger.csv", index=False)
 
-    valid = out[(out.get("status").isna()) & (out["gate"])]
+    valid = out[out["status"].isna() & out["gate"].fillna(False)]
     summary = {
         "eligible_expiries": int(len(out)),
         "gated_trades": int(len(valid)),
