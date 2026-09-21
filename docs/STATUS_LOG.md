@@ -19,4 +19,4 @@
 | 4.3 | Cost stress | DONE PROVISIONALLY | 2.0/2.5/3.0 point slippage and brokerage multiplier stress completed as a mechanical direct-entry-cost diagnostic. |
 | 5.1 | Manuscript | DONE PROVISIONALLY | Complete manuscript, figures, supplementary tables and data dictionary assembled on phase-5-manuscript-sensex. |
 | 5.2 | Final conclusion | DONE PROVISIONALLY | No statistically reliable production improvement established over the locked baseline. |
-| 5.3 | Reproducibility | IN FINAL CANARY | Manual workflows are complete; final manuscript canary is validating the full end-to-end rebuild after the Sensex index-file parser fix. |
+| 5.3 | Reproducibility | DONE PROVISIONALLY | Manual workflows are complete; the final manuscript package, figures, supplementary tables and data dictionary are committed. The temporary canary trigger was removed after the parser correction; canary runs are not treated as research evidence. |
