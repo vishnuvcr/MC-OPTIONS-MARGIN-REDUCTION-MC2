@@ -1,0 +1,21 @@
+{
+  "split_a": {
+    "train_end": "2025-06-30",
+    "validation_start": "2025-07-01",
+    "validation_end": "2025-12-31",
+    "test_start": "2026-01-01"
+  },
+  "split_b": {
+    "train_end": "2025-12-31",
+    "test_start": "2026-01-01"
+  },
+  "min_gated_trades": 20,
+  "ev_retention": 0.95,
+  "win_rate_tolerance": 0.02,
+  "bootstrap_reps": 10000,
+  "permutation_reps": 10000,
+  "stress_slippage": [2.0,2.5,3.0],
+  "brokerage_multipliers": [0.5,1.0,1.5],
+  "sensex_regime_field": "sensex_d3_gap_pct",
+  "relative_regime_field": "nifty_minus_sensex_prior20d_log_return"
+}
