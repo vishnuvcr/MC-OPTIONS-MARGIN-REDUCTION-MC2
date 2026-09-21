@@ -2,24 +2,26 @@
 
 Branch: phase-5-manuscript-sensex
 
-Status: **IN PROGRESS**
+Status: **DONE PROVISIONALLY — FINAL PACKAGE ASSEMBLED**
 
-## Required contents
+## Deliverables
 
 - complete research manuscript;
-- abstract, methods, results, statistical inference, discussion, limitations, conclusion and future directions;
+- abstract, research question, hypotheses, methodology, results, inference, discussion, strengths, limitations, conclusion and future directions;
 - baseline and candidate tables;
-- walk-forward tables;
-- Sensex regime analysis;
-- cost-stress tables;
+- walk-forward results;
+- Sensex regime-stratified results;
+- cost-stress analysis;
 - figures;
-- supplementary data dictionary;
-- exact model/configuration version;
-- source lineage and coverage limitations.
+- supplementary tables;
+- data dictionary;
+- source lineage;
+- phase-specific error logs and workflows.
 
-The manuscript must retain the distinction between:
-- actual exchange/broker margin;
-- ES95/ES99 risk-capital proxies;
-- provisional MC results.
+## Final scientific status
 
-The manuscript is not final until Phase 4 outputs exist and the exact original 756-session MC specification issue is explicitly disclosed.
+The finite Phase 3 strike search found an in-sample ES99 frontier around P22/P33/P67/P78, but the chronological Phase 4 tests do not establish a statistically reliable production improvement over the locked baseline.
+
+Sensex was incorporated as a required non-look-ahead cross-market diagnostic in Phases 1–5. The current Sensex-regime evidence is heterogeneous and subgroup sizes are small; no Sensex-conditioned production rule is supported.
+
+The exact original mathematical transformation behind the phrase “756-session bootstrap MC” remains unresolved. Therefore all current numerical results remain provisional and must be re-run under the authoritative MC implementation once recovered.
