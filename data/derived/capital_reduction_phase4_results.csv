@@ -1,0 +1,12 @@
+metric,baseline,candidate,delta,reduction_pct,notes
+training_gated_capital_proxy_inr,108417.1331,107629.8414,-787.2917,0.7262,Q19 selected using training only
+test_gated_capital_proxy_inr,115438.7652,114243.1715,-1195.5938,1.0357,2026 paired common-gated n=16
+test_capital_proxy_bootstrap_ci_inr,-2317.6563,-286.4063,, ,95% CI for candidate-minus-baseline
+test_capital_proxy_bootstrap_reduction_ci_pct,0.2538,1.9666,, ,95% paired bootstrap CI
+test_capital_proxy_signflip_p,0.1214,0.1214,, ,10000 paired sign flips
+test_pnl_per_gated_trade_inr,3634.6081,3612.0070,-22.6011,,2-point slippage
+test_pnl_bootstrap_ci_inr,-657.6812,818.3683,, ,95% paired bootstrap CI
+test_pnl_signflip_p,1.0,1.0,,,10000 paired sign flips
+test_win_rate,0.75,0.75,0,0,16 common gated trades
+test_pnl_2.5pt_inr,3439.6081,3417.0070,-22.6011,,direct additional slippage-cost stress
+test_pnl_3.0pt_inr,3244.6081,3222.0070,-22.6011,,direct additional slippage-cost stress
