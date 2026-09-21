@@ -1,16 +1,18 @@
 name: Phase 2 Baseline Reconstruction
 
 on:
-  push:
-    branches:
-      - phase-2-baseline-reconstruction
   workflow_dispatch:
+
+concurrency:
+  group: phase2-baseline
+  cancel-in-progress: true
 
 jobs:
   baseline:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    timeout-minutes: 90
 
     steps:
       - name: Checkout
