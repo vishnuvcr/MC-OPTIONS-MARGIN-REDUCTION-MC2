@@ -1,0 +1,52 @@
+name: Phase 4 Walk-Forward Sensex Robustness
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: phase4-walk-forward-sensex
+  cancel-in-progress: true
+
+jobs:
+  robustness:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    timeout-minutes: 60
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install pandas numpy
+
+      - name: Validate required Phase 3 ledger
+        run: |
+          test -f data/derived/phase3_candidate_trade_ledger.csv
+
+      - name: Run walk-forward
+        run: python src/phase4_walk_forward.py
+
+      - name: Upload results
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase4-walk-forward-results
+          path: |
+            data/derived/phase4_training_selection.csv
+            data/derived/phase4_walk_forward_results.csv
+            data/derived/phase4_sensex_regime_results.csv
+            data/derived/phase4_run_summary.json
+
+      - name: Commit results
+        run: |
+          git config user.name "MC2 research bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/derived/phase4_*
+          git diff --cached --quiet || git commit -m "Store Phase 4 walk-forward results [skip ci]"
+          git push
