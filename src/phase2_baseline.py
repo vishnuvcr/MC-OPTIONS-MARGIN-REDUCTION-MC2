@@ -321,8 +321,9 @@ def main() -> None:
             )
 
     out = pd.DataFrame(results)
-    if "status" not in out.columns:
-        out["status"] = np.nan
+    for col in ["status", "gate", "win", "realized_net_pnl_inr", "es95_inr_proxy", "es99_inr_proxy"]:
+        if col not in out.columns:
+            out[col] = np.nan
     out_dir = Path("data/derived")
     out_dir.mkdir(parents=True, exist_ok=True)
     out.to_csv(out_dir / "phase2_baseline_trade_ledger.csv", index=False)
