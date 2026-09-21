@@ -22,3 +22,6 @@
 | 5.3 | Reproducibility | DONE PROVISIONALLY | Manual workflows are complete; the final manuscript package, figures, supplementary tables and data dictionary are committed. The temporary canary trigger was removed after the parser correction; canary runs are not treated as research evidence. |
 
 | 6.0 | Research direction | CORRECTED | Primary objective reconfirmed: reduce actual total trading capital/margin by changing BATMAN parameters, not merely reduce an ES/risk proxy. Next research question recorded in `research/next_research_question.md`. |
+
+| CR-1.1 | Capital-reduction Phase 1 | IN PROGRESS | New research track started without altering the completed Sensex-integrated research; primary objective fixed as parameter-driven actual capital/margin reduction. |
+| CR-1.2 | Capital-reduction Phase 1 | DONE PROVISIONALLY | Literature matrix, margin/capital protocol, parameter registry, phase map, error log, manual workflow, and combined manuscript plan committed. |
