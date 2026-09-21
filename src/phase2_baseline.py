@@ -274,7 +274,7 @@ def main() -> None:
     results = []
 
     for path in sorted(raw.glob("*.parquet")):
-        if path.name == "NIFTY_index.parquet":
+        if path.name.endswith("_index.parquet"):
             continue
         expiry = parse_expiry(path)
         if expiry not in closes.index:
