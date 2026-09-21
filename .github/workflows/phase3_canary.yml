@@ -38,6 +38,9 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install pandas numpy pyarrow requests
 
+      - name: Acquire source data
+        run: python scripts/phase2_download_sources.py
+
       - name: Run Phase 3 search
         run: python src/phase3_strike_search.py
 
