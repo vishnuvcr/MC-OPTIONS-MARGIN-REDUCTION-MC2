@@ -21,6 +21,7 @@ from phase2_baseline import (
     read_option_entry,
     select_legs,
     strategy_ev,
+    regime_features,
 )
 
 
@@ -124,6 +125,7 @@ def gross_9p3_shock_loss(
 def build_trade_rows() -> pd.DataFrame:
     candidates = candidate_specs()
     index = load_index(RAW / "NIFTY_index.parquet")
+    sensex = load_index(RAW / "SENSEX_index.parquet")
     closes = daily_closes(index)
 
     source_manifest = json.loads(
@@ -145,6 +147,7 @@ def build_trade_rows() -> pd.DataFrame:
         d3 = closes.index[ex_pos - 3]
         try:
             spot = first_index_price(d3, index)
+            regime = regime_features(index, sensex, d3)
             prior = closes.loc[:d3].iloc[:-1]
 
             terminal = bootstrap_terminal(
@@ -187,6 +190,13 @@ def build_trade_rows() -> pd.DataFrame:
                     "expiry": str(expiry.date()),
                     "d3": str(d3.date()),
                     "spot_0930": spot,
+                    "sensex_0930": regime["sensex_0930"],
+                    "sensex_prev_close": regime["sensex_prev_close"],
+                    "sensex_d3_gap_pct": regime["sensex_d3_gap_pct"],
+                    "nifty_d3_gap_pct": regime["nifty_d3_gap_pct"],
+                    "sensex_prior20d_log_return": regime["sensex_prior20d_log_return"],
+                    "nifty_prior20d_log_return": regime["nifty_prior20d_log_return"],
+                    "nifty_minus_sensex_prior20d_log_return": regime["nifty_minus_sensex_prior20d_log_return"],
                     "target_q20": candidate["q20"],
                     "target_q35": candidate["q35"],
                     "target_q65": candidate["q65"],
