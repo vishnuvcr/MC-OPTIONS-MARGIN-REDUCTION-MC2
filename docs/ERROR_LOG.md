@@ -11,3 +11,5 @@
 | ERR-007 | 2026-09-22 | Phase 3 | Sensex-aware candidate code initially ran with the older NIFTY-only source loader. | Added SENSEX.parquet acquisition to the branch loader and reran the candidate search. |
 | ERR-008 | 2026-09-22 | Phase 3 | Requiring valid D3 Sensex information reduced usable expiries from 98 to 97. | Treat missing Sensex observations as data-quality exclusions; do not impute or forward-fill. |
 | ERR-009 | 2026-09-22 | Phase 5 | Adding SENSEX_index.parquet exposed a parser bug that attempted to treat index parquet filenames as option expiry dates. | Changed the shared baseline loop to skip all *_index.parquet files; affected phase branches were patched. |
+
+| ERR-010 | 2026-09-22 | Research direction | Prior response framed the next question around recovery of the Monte Carlo implementation rather than the user's primary objective of reducing total trading capital/margin by adjusting BATMAN parameters. | Corrected the research framing: parameter-driven actual capital/margin minimization is the primary objective; MC recovery remains a prerequisite for an authoritative rerun. |
