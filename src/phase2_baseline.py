@@ -277,16 +277,22 @@ def main() -> None:
                     CONFIG["brokerage_per_order_inr"],
                 )
                 expiry_spot = float(closes.loc[expiry])
-                real = strategy_ev(np.array([expiry_spot]), legs)[0] * lot
-                # Replace simulated terminal with realised expiry in the same net-cost convention.
+                # Realised expiry P&L using the same adverse entry convention as the
+                # simulated path P&L. The earlier implementation omitted the
+                # direct entry-price impact of the 2-point slippage assumption.
                 sell_rate, exercise_rate = stt_rates(expiry)
-                real_net = real
+                real_net = 0.0
                 for leg in legs:
-                    adverse_entry = leg.entry + CONFIG["primary_slippage_points_per_leg"] if leg.qty > 0 else max(leg.entry - CONFIG["primary_slippage_points_per_leg"], 0.0)
+                    adverse_entry = (
+                        leg.entry + CONFIG["primary_slippage_points_per_leg"]
+                        if leg.qty > 0
+                        else max(leg.entry - CONFIG["primary_slippage_points_per_leg"], 0.0)
+                    )
                     intrinsic = float(option_intrinsic(expiry_spot, leg.strike, leg.option_type))
-                    if leg.qty > 0:
-                        real_net -= (intrinsic * lot * exercise_rate) if intrinsic > 0 else 0.0
-                    else:
+                    real_net += leg.qty * (intrinsic - adverse_entry) * lot
+                    if leg.qty > 0 and intrinsic > 0:
+                        real_net -= intrinsic * lot * exercise_rate
+                    elif leg.qty < 0:
                         real_net -= (-leg.qty) * lot * adverse_entry * sell_rate
                 real_net -= CONFIG["brokerage_per_order_inr"] * len(legs)
                 realized = float(real_net)
