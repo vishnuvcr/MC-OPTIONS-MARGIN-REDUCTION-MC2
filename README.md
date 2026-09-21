@@ -58,6 +58,14 @@ The exact mathematical path transformation behind the project description “756
 
 ES95/ES99 and stress-loss values are risk-capital proxies, not historical Paytm Money or exchange SPAN margin unless separately reconstructed.
 
+## Corrected next research direction
+
+The primary optimization target is **actual total trading capital / blocked margin**, achieved by changing admissible BATMAN parameters while keeping the one-lot position size fixed. ES95/ES99 remains a secondary risk diagnostic.
+
+The next research question is documented in [research/next_research_question.md](research/next_research_question.md).
+
+NSE states that SPAN is portfolio-based and gives offsetting treatment to option positions; Paytm Money states that option-writing upfront margin is exchange-defined and can be checked through its margin calculator. citeturn314244search1turn314244search7
+
 ## Future research
 
 1. Recover the authoritative MC implementation.
