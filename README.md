@@ -1,6 +1,6 @@
 # MC2 — NIFTY Batman Margin-Reduction Research
 
-Status: **Phase 0 — repository foundation**
+Status: **Phase 1 complete; Phase 2 pending data assembly**
 
 This repository studies whether NIFTY BATMAN option strike placement can be altered to reduce margin/risk capital while retaining profit expectancy and win rate.
 
@@ -21,17 +21,22 @@ This repository studies whether NIFTY BATMAN option strike placement can be alte
 
 ## Research status
 
-- Phase 0 — **In progress**: repository foundation and research protocol.
-- Phase 1 — **Planned**: literature, data-source, rule and cost audit.
-- Phase 2 — **Planned**: baseline reconstruction and data-quality validation.
-- Phase 3 — **Planned**: strike alteration search with margin objective.
-- Phase 4 — **Planned**: out-of-sample validation and robustness.
-- Phase 5 — **Planned**: final manuscript and reproducible package.
+- Phase 0 — **DONE**: repository foundation and research protocol.
+- Phase 1 — **DONE**: literature, data-source, contract/cost and methodological audit.
+- Phase 2 — **BLOCKED pending data**: baseline reconstruction requires the 09:30+ intraday option history plus historical contract/settlement data.
+- Phase 3 — **PLANNED**: controlled strike/spot alteration search.
+- Phase 4 — **PLANNED**: walk-forward and robustness validation.
+- Phase 5 — **PLANNED**: final manuscript and reproducibility package.
 
-## Key project files
+## Phase 1 outputs
 
 - [Research plan](docs/RESEARCH_PLAN.md)
-- [Decision/status log](docs/STATUS_LOG.md)
+- [Phase 1 report](phase/phase1/README.md)
+- [Literature review](research/literature_review.md)
+- [Data-source manifest](research/data_source_manifest.md)
+- [Contract/cost timeline](research/contract_cost_timeline.md)
+- [Strike-alteration hypotheses](research/phase1_hypotheses.md)
+- [Status log](docs/STATUS_LOG.md)
 - [Error log](docs/ERROR_LOG.md)
 - [Conversation record](docs/CONVERSATION_LOG.md)
 
@@ -40,10 +45,16 @@ This repository studies whether NIFTY BATMAN option strike placement can be alte
 The research must separate:
 1. economic profitability,
 2. exchange/broker margin requirement,
-3. a transparent risk-capital proxy when exact historical broker margin is unavailable.
+3. a transparent risk-capital proxy when exact historical margin is unavailable.
 
 The baseline rule is not to be silently changed. Any proposed alteration must be evaluated against the locked baseline under identical data, execution, cost, and sizing assumptions.
 
-## Sources
+## Key Phase 1 finding
 
-Primary and secondary sources are documented in the research files. The intended data hierarchy is official NSE/NSE Clearing where feasible, supplemented by clearly attributed open datasets and broker datasets for intraday validation.
+There is a defensible research basis for expecting strike geometry to affect required capital because option margining and portfolio solvency constraints depend on the combined portfolio, not just on maximum expiry payoff. However, there is no empirical result yet that a specific BATMAN alteration preserves profit and win rate.
+
+The next numerical phase is therefore data-dependent rather than strategy-dependent.
+
+## Data policy
+
+Official NSE/NSE Clearing sources are preferred for settlement, contract metadata and historical risk parameters. Open 1-minute NIFTY option datasets can be used for intraday execution after schema, coverage and provenance checks. Large or restricted raw datasets should not be committed wholesale.
