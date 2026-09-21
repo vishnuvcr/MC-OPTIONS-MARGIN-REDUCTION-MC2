@@ -21,7 +21,7 @@ This repository studies whether NIFTY BATMAN option strike placement can be alte
 
 ## Sensex integration
 
-BSE SENSEX is now a required cross-market series in Phases 1–5. The TradeMarkk source provides `index/SENSEX.parquet` with 1-minute OHLCV and IST timestamps. Official BSE market-data/index-archive sources remain the verification hierarchy. urlBSE market-data servicehttps://marketdata.bseindia.com/ urlBSE Sensex pagehttps://www.bseindia.com/sensex/code/45
+BSE SENSEX is now a required cross-market series in Phases 1–5. The TradeMarkk source provides `index/SENSEX.parquet` with 1-minute OHLCV and IST timestamps. Official BSE market-data/index-archive sources remain the verification hierarchy. See the BSE market-data service and BSE Sensex page listed in the research source manifest.
 
 Sensex is recorded as a **non-look-ahead diagnostic/regime variable**. It does not alter the locked NIFTY signal, gate, strike mapping or leg ratio.
 
