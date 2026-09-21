@@ -10,6 +10,7 @@
     "short_call_outer": -2
   },
   "brokerage_per_order_inr": 20.0,
+  "option_data_min_expiry": "2024-07-01",
   "model_operationalization": "At the 09:30 signal, bootstrap h daily log returns with replacement from the preceding 756 NIFTY sessions, where h is the number of trading-session closes from D3 to expiry. Start from the 09:30 NIFTY spot. This is provisional until the original MC implementation is recovered.",
   "entry_price_field": "open_of_first_bar_strictly_after_09_30",
   "expiry_settlement_field": "NIFTY_index_close_on_expiry",
