@@ -10,3 +10,4 @@
 | ERR-006 | 2026-09-22 | Phase 2 | Realized P&L initially omitted the direct cash-flow impact of the locked 2-point entry slippage. | Corrected the implementation and reran the baseline; the earlier 81.13%/₹2,442 result is superseded by 77.36%/₹1,702.98. |
 | ERR-007 | 2026-09-22 | Phase 3 | Sensex-aware candidate code initially ran with the older NIFTY-only source loader. | Added SENSEX.parquet acquisition to the branch loader and reran the candidate search. |
 | ERR-008 | 2026-09-22 | Phase 3 | Requiring valid D3 Sensex information reduced usable expiries from 98 to 97. | Treat missing Sensex observations as data-quality exclusions; do not impute or forward-fill. |
+| ERR-009 | 2026-09-22 | Phase 5 | Adding SENSEX_index.parquet exposed a parser bug that attempted to treat index parquet filenames as option expiry dates. | Changed the shared baseline loop to skip all *_index.parquet files; affected phase branches were patched. |
