@@ -1,0 +1,9 @@
+{
+  "candidate_count": 53,
+  "baseline_candidate_id": "Q20p0_35p0_65p0_80p0",
+  "baseline_session_ev_inr": 920.9985542091895,
+  "baseline_gated_trade_ev_inr": 1702.9784587264262,
+  "baseline_win_rate": 0.7735849056603774,
+  "baseline_mean_es99_inr": 12688.271231135923,
+  "minimum_frontier_gated_trades": 20
+}
