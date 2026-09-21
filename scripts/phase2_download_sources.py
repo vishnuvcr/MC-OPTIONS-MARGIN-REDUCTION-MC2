@@ -41,8 +41,9 @@ def main() -> None:
     raw = Path("data/raw")
     raw.mkdir(parents=True, exist_ok=True)
 
-    index_url = f"{BASE}/datasets/{DATASET}/resolve/main/index/NIFTY.parquet?download=true"
-    download(index_url, raw / "NIFTY_index.parquet")
+    for symbol in ("NIFTY", "SENSEX"):
+        index_url = f"{BASE}/datasets/{DATASET}/resolve/main/index/{symbol}.parquet?download=true"
+        download(index_url, raw / f"{symbol}_index.parquet")
 
     api = f"{BASE}/api/datasets/{DATASET}/tree/main/options/NIFTY"
     params = {"recursive": "false", "expand": "false", "limit": "1000"}
