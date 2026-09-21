@@ -1,7 +1,7 @@
 # Capital-Reduction Track — Phase 1
 
 Branch: capital-reduction-phase-1
-Status: IN PROGRESS — LITERATURE / MARGIN / PARAMETER AUDIT
+Status: DONE PROVISIONALLY — LITERATURE / MARGIN / PARAMETER AUDIT
 
 ## Objective
 Translate the user's primary objective into a reproducible research specification: reduce the actual total capital/margin required to run the same one-lot BATMAN strategy by changing its parameters.
@@ -29,3 +29,6 @@ Phase 1 is complete only after the literature/data audit is documented, margin d
 
 ## Next branch
 capital-reduction-phase-2
+
+## Phase 1 conclusion
+The primary optimization target is fixed as actual total capital/margin. The study will use historical NSE SPAN risk-parameter files where obtainable, with Paytm Money observations as broker-level validation and transparent proxies only as secondary diagnostics. The pre-registered parameter families and one-lot constraint are now frozen for Phase 2.
