@@ -37,6 +37,9 @@ jobs:
       - name: Acquire NIFTY and Sensex sources
         run: python scripts/phase2_download_sources.py
 
+      - name: Rebuild corrected Phase 2 baseline
+        run: python src/phase2_baseline.py
+
       - name: Rebuild Phase 3 candidate ledger
         run: python src/phase3_strike_search.py
 
