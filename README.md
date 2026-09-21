@@ -4,6 +4,22 @@ Status: **Phases 0–5 complete provisionally; Sensex-integrated reproducibility
 
 This repository studies whether NIFTY BATMAN strike placement can be altered to reduce margin/risk capital while retaining profit expectancy and win rate.
 
+## New research track: parameter-driven capital reduction
+
+A separate research track now starts from Phase 1 in this same repository while retaining the original Sensex-integrated MC2 Phases 0–5 intact.
+
+**Primary objective:** reduce the actual total capital / blocked margin required for the same one-lot four-leg BATMAN position by changing BATMAN parameters, not by reducing lot size.
+
+- [Capital-reduction research plan](research/capital_reduction/RESEARCH_PLAN.md)
+- [Capital-reduction phase map](research/capital_reduction/PHASE_MAP.md)
+- [Phase 1 literature matrix](research/capital_reduction/phase1_literature_matrix.md)
+- [Phase 1 margin/capital protocol](research/capital_reduction/phase1_margin_data_protocol.md)
+- [Phase 1 parameter registry](research/capital_reduction/phase1_parameter_registry.md)
+- [Combined manuscript plan](research/capital_reduction/COMBINED_MANUSCRIPT_PLAN.md)
+- [Phase 1 branch](https://github.com/vishnuvcr/MC-OPTIONS-MARGIN-REDUCTION-MC2/tree/capital-reduction-phase-1)
+
+This track will finish with a combined manuscript integrating the earlier research and the new capital-reduction results.
+
 ## Locked baseline
 
 - D3 trading session before expiry
