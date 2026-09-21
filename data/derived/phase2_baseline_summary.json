@@ -1,0 +1,10 @@
+{
+  "eligible_expiries": 99,
+  "gated_trades": 0,
+  "win_rate": null,
+  "mean_realized_net_pnl_inr": null,
+  "median_realized_net_pnl_inr": null,
+  "mean_es95_inr_proxy": null,
+  "mean_es99_inr_proxy": null,
+  "model_status": "At the 09:30 signal, bootstrap h daily log returns with replacement from the preceding 756 NIFTY sessions, where h is the number of trading-session closes from D3 to expiry. Start from the 09:30 NIFTY spot. This is provisional until the original MC implementation is recovered."
+}
