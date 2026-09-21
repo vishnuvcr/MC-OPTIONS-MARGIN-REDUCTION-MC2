@@ -20,3 +20,5 @@
 | 5.1 | Manuscript | DONE PROVISIONALLY | Complete manuscript, figures, supplementary tables and data dictionary assembled on phase-5-manuscript-sensex. |
 | 5.2 | Final conclusion | DONE PROVISIONALLY | No statistically reliable production improvement established over the locked baseline. |
 | 5.3 | Reproducibility | DONE PROVISIONALLY | Manual workflows are complete; the final manuscript package, figures, supplementary tables and data dictionary are committed. The temporary canary trigger was removed after the parser correction; canary runs are not treated as research evidence. |
+
+| 6.0 | Research direction | CORRECTED | Primary objective reconfirmed: reduce actual total trading capital/margin by changing BATMAN parameters, not merely reduce an ES/risk proxy. Next research question recorded in `research/next_research_question.md`. |
