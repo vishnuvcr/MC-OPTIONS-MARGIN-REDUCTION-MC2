@@ -389,6 +389,7 @@ def summarise(trades: pd.DataFrame) -> pd.DataFrame:
             feasible = out[
                 (out["gated_trades"] >= min_n)
                 & (out["mean_net_pnl_per_valid_expiry"] >= b_session * (1.0 - ev_tol))
+                & (out["mean_net_pnl_per_gated_trade"] >= b_gate * (1.0 - ev_tol))
                 & (out["win_rate"] >= b_win - win_tol / 100.0)
             ].copy()
             feasible = feasible.sort_values(
@@ -407,6 +408,10 @@ def summarise(trades: pd.DataFrame) -> pd.DataFrame:
                         "es99_reduction_pct": pick["es99_reduction_pct"],
                         "win_rate": pick["win_rate"],
                         "mean_net_pnl_per_valid_expiry": pick["mean_net_pnl_per_valid_expiry"],
+                        "mean_net_pnl_per_gated_trade": pick["mean_net_pnl_per_gated_trade"],
+                        "session_ev_retention": pick["session_ev_retention"],
+                        "gated_ev_retention": pick["gated_ev_retention"],
+                        "win_delta_pp": pick["win_delta_pp"],
                         "gated_trades": pick["gated_trades"],
                     }
                 )
