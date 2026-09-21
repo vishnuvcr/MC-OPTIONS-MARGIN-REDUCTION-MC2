@@ -87,3 +87,6 @@ Phase 2 is complete only when the baseline has:
 - ES95/ES99,
 - and a clearly labelled margin measure or proxy.
 
+## Regime labels collected for later robustness
+
+The baseline ledger will retain enough date information to join official regime variables after reconstruction: NIFTY volatility/India VIX, FII/FPI and DII flows, participant-wise derivative positioning, BSE Sensex/global volatility context, holiday/expiry-transition periods, and major event/corporate-action windows. These are diagnostics, not additional signal inputs.
