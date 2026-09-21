@@ -122,3 +122,16 @@ Every phase branch must contain:
 - a workflow with a manual workflow_dispatch trigger.
 
 The research plan itself changes only when a research-plan decision changes. Routine status changes belong in STATUS_LOG.md, not by rewriting the plan.
+
+## Regime and market-context controls
+
+Because the objective is to test capital efficiency rather than fit a single market regime, the final analysis will stratify results by:
+- NIFTY India VIX / realised-volatility regime;
+- FII/FPI and DII flow regime;
+- NIFTY versus BSE Sensex relative regime and overnight global equity/volatility state;
+- major global volatility/gold/FX stress state where data are available without look-ahead;
+- expiry-calendar and holiday-transition regimes;
+- major corporate-action/event windows that can distort index constituents or option liquidity.
+
+These variables are **diagnostic/regime labels**, not extra signal inputs to the locked BATMAN rule. The primary strategy result remains determined only by the locked rule. Regime labels are used for robustness, heterogeneity analysis and stress attribution. Official NSE reports expose daily volatility, participant-wise open interest/trading volume, FII derivative statistics, settlements and SPAN files; the NSE FII/DII report also provides provisional combined NSE/BSE/MSEI flows.
+
