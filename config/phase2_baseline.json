@@ -1,0 +1,18 @@
+{
+  "bootstrap_sessions": 756,
+  "mc_paths": 5000,
+  "signal_time": "09:30:00",
+  "primary_slippage_points_per_leg": 2.0,
+  "position": {
+    "long_put_inner": 1,
+    "short_put_outer": -2,
+    "long_call_inner": 1,
+    "short_call_outer": -2
+  },
+  "brokerage_per_order_inr": 20.0,
+  "model_operationalization": "At the 09:30 signal, bootstrap h daily log returns with replacement from the preceding 756 NIFTY sessions, where h is the number of trading-session closes from D3 to expiry. Start from the 09:30 NIFTY spot. This is provisional until the original MC implementation is recovered.",
+  "entry_price_field": "open_of_first_bar_strictly_after_09_30",
+  "expiry_settlement_field": "NIFTY_index_close_on_expiry",
+  "strike_mapping": "ordered minimum-total-absolute-distance assignment to distinct listed strikes",
+  "primary_status": "provisional_operationalization"
+}
