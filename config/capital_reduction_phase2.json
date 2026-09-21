@@ -1,0 +1,12 @@
+{
+  "source_baseline_ledger": "data/derived/prior_track_phase2_baseline_trade_ledger.csv",
+  "span_dir": "data/raw/span",
+  "span_manifest": "data/raw/span/span_manifest.csv",
+  "margin_library": "marginism",
+  "primary_entry_file_type": "BOD",
+  "fallback_entry_file_type": "PREVIOUS_DAY_EOD",
+  "one_lot_only": true,
+  "margin_formula": "entry_capital = span_plus_exposure_plus_additional + max(net_premium_payable, 0)",
+  "primary_metric": "total_entry_capital",
+  "secondary_metric": "peak_capital"
+}
