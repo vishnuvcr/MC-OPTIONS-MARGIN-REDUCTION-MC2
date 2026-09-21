@@ -88,7 +88,7 @@ def load_index(path: Path) -> pd.DataFrame:
 
 
 def first_index_price(day: pd.Timestamp, index_df: pd.DataFrame) -> float:
-    x = index_df[index_df["trade_date"].eq(day) & (index_df["timestamp"].dt.time >= pd.Timestamp("09:30").time())]
+    x = index_df[index_df["trade_date"].eq(day) & (index_df["timestamp"].dt.time > pd.Timestamp("09:30").time())]
     if x.empty:
         raise ValueError(f"No NIFTY index bar at/after 09:30 on {day.date()}")
     return float(x.iloc[0]["open"])
@@ -119,6 +119,8 @@ def read_option_entry(path: Path, d3: pd.Timestamp) -> pd.DataFrame:
     df["trade_date"] = df["timestamp"].dt.normalize()
     x = df[df["trade_date"].eq(d3) & (df["timestamp"].dt.time > pd.Timestamp("09:30").time())].copy()
     x = x.dropna(subset=["strike", "option_type", "open"])
+    if "volume" in x.columns:
+        x = x[x["volume"].fillna(0) > 0]
     if x.empty:
         return x
     x["option_type"] = x["option_type"].astype(str).str.upper()
@@ -129,6 +131,7 @@ def read_option_entry(path: Path, d3: pd.Timestamp) -> pd.DataFrame:
 def bootstrap_terminal(
     spot: float,
     prior_closes: pd.Series,
+    trading_days: pd.Index,
     d3: pd.Timestamp,
     expiry: pd.Timestamp,
     paths: int,
@@ -138,7 +141,7 @@ def bootstrap_terminal(
         raise ValueError("Insufficient history for 756-session bootstrap")
     hist = prior_closes.iloc[-(CONFIG["bootstrap_sessions"] + 1):].astype(float)
     log_returns = np.log(hist / hist.shift(1)).dropna().to_numpy()
-    dates = prior_closes.index
+    dates = trading_days
     try:
         d3_pos = list(dates).index(d3)
         ex_pos = list(dates).index(expiry)
@@ -239,7 +242,7 @@ def main() -> None:
             spot = first_index_price(d3, index)
             prior = closes.loc[:d3].iloc[:-1]
             terminal = bootstrap_terminal(
-                spot, prior, d3, expiry, paths,
+                spot, prior, closes.index, d3, expiry, paths,
                 seed=int(expiry.strftime("%Y%m%d")),
             )
             entry = read_option_entry(path, d3)
